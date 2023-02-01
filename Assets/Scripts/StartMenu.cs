@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -9,18 +10,20 @@ using UnityEditor;
 
 public class StartMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private TextMeshProUGUI bestScoreText;
+
+    
+    private void Start()
     {
-        
+        bestScoreText.text = "Best Score: " + DataPersistence.Instance.PlayerRecordName + " : " + DataPersistence.Instance.Record;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeName(string s)
     {
-        
+        DataPersistence.Instance.PlayerName = inputField.text;
+        Debug.Log(DataPersistence.Instance.PlayerName);
     }
-
     public void StartGame()
     {
         SceneManager.LoadScene(1);
@@ -36,6 +39,5 @@ public class StartMenu : MonoBehaviour
         {
             Application.Quit();
         }
-
     }
 }
